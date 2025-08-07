@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Prac5_05
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            if (!agree.Checked)
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "You must agree to the terms to submit the form.";
+                return;
+            }
+
+
+            if (!FileUpload1.HasFile)
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "Please upload a file.";
+                return;
+            }
+
+
+            string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
+            if (fileExtension != ".pdf" && fileExtension != ".doc" && fileExtension != ".docx")
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "Only PDF or DOC/DOCX files are allowed.";
+                return;
+            }
+
+            string Name = name.Text.Trim();
+            string Email = email.Text.Trim();
+            string JobName = jobname.Text.Trim();
+            string Position = dropdown.SelectedValue;
+            string Salary = salary.Text.Trim();
+
+
+            text.Text = $"Name: {Name}<br/>Email: {Email}<br/>Job Name: {JobName}<br/>Position: {Position}<br/>Salary: {Salary}<br/>File uploaded successfully.";
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Prac5_05
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            if (!agree.Checked)
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "You must agree to the terms to submit the form.";
+                return;
+            }
+
+
+            if (!FileUpload1.HasFile)
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "Please upload a file.";
+                return;
+            }
+
+
+            string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
+            if (fileExtension != ".pdf" && fileExtension != ".doc" && fileExtension != ".docx")
+            {
+                text.ForeColor = System.Drawing.Color.Red;
+                text.Text = "Only PDF or DOC/DOCX files are allowed.";
+                return;
+            }
+
+            string Name = name.Text.Trim();
+            string Email = email.Text.Trim();
+            string JobName = jobname.Text.Trim();
+            string Position = dropdown.SelectedValue;
+            string Salary = salary.Text.Trim();
+
+
+            text.Text = $"Name: {Name}<br/>Email: {Email}<br/>Job Name: {JobName}<br/>Position: {Position}<br/>Salary: {Salary}<br/>File uploaded successfully.";
+        }
+    }
+}
