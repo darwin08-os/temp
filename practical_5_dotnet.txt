@@ -105,3 +105,8 @@ namespace Prac5_05
         }
     }
 }
+
+
+<appSettings>
+	<add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
+</appSettings>
