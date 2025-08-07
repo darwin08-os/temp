@@ -1,20 +1,87 @@
+html file : 
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="validation.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server" Text="Name :"></asp:Label>
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="plz fill name" ForeColor="Red"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Label ID="Label5" runat="server" Text="Age : "></asp:Label>
+            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBox5" ErrorMessage="invalid input" ForeColor="Red" MaximumValue="35" MinimumValue="18"></asp:RangeValidator>
+            <br />
+            <br />
+            <asp:Label ID="Label2" runat="server" Text="Email : "></asp:Label>
+            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox2" ErrorMessage="plz fill email" ForeColor="Red"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Label ID="Label3" runat="server" Text="contact : "></asp:Label>
+            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox3" ErrorMessage="plz enter contact" ForeColor="Red"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Label ID="Label4" runat="server" Text="Job Description : "></asp:Label>
+            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="TextBox4" ErrorMessage="enter job description" ForeColor="Red"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            job position :
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem></asp:ListItem>
+                <asp:ListItem>junior developer</asp:ListItem>
+                <asp:ListItem>senior developer</asp:ListItem>
+                <asp:ListItem>web designer</asp:ListItem>
+                <asp:ListItem>penetration tester</asp:ListItem>
+            </asp:DropDownList>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="DropDownList1" ErrorMessage="select a job position" ForeColor="Red"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:FileUpload ID="FileUpload1" runat="server" />
+            <br />
+            <br />
+            <asp:CheckBox ID="agree" runat="server"  Text="agree or not" />
+            <br />
+            <br />
+            <asp:Label ID="text" runat="server"></asp:Label>
+            <br />
+            <br />
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
+        </div>
+    </form>
+</body>
+</html>
+
+
+aspx.cs file : 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
-namespace Prac5_05
+namespace validation
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+              
         }
 
-        protected void submit_Click(object sender, EventArgs e)
+        protected void Button1_Click(object sender, EventArgs e)
         {
             if (!agree.Checked)
             {
@@ -22,7 +89,10 @@ namespace Prac5_05
                 text.Text = "You must agree to the terms to submit the form.";
                 return;
             }
-
+            else
+            {
+                text.Text = string.Empty; 
+            }
 
             if (!FileUpload1.HasFile)
             {
@@ -30,7 +100,10 @@ namespace Prac5_05
                 text.Text = "Please upload a file.";
                 return;
             }
-
+            else
+            {
+                text.Text = string.Empty;
+            }
 
             string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
             if (fileExtension != ".pdf" && fileExtension != ".doc" && fileExtension != ".docx")
@@ -39,74 +112,20 @@ namespace Prac5_05
                 text.Text = "Only PDF or DOC/DOCX files are allowed.";
                 return;
             }
-
-            string Name = name.Text.Trim();
-            string Email = email.Text.Trim();
-            string JobName = jobname.Text.Trim();
-            string Position = dropdown.SelectedValue;
-            string Salary = salary.Text.Trim();
-
-
-            text.Text = $"Name: {Name}<br/>Email: {Email}<br/>Job Name: {JobName}<br/>Position: {Position}<br/>Salary: {Salary}<br/>File uploaded successfully.";
-        }
-    }
-}
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-namespace Prac5_05
-{
-    public partial class WebForm1 : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+            else
+            {
+                text.Text = string.Empty;
+            }
 
         }
 
-        protected void submit_Click(object sender, EventArgs e)
-        {
-            if (!agree.Checked)
-            {
-                text.ForeColor = System.Drawing.Color.Red;
-                text.Text = "You must agree to the terms to submit the form.";
-                return;
-            }
-
-
-            if (!FileUpload1.HasFile)
-            {
-                text.ForeColor = System.Drawing.Color.Red;
-                text.Text = "Please upload a file.";
-                return;
-            }
-
-
-            string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
-            if (fileExtension != ".pdf" && fileExtension != ".doc" && fileExtension != ".docx")
-            {
-                text.ForeColor = System.Drawing.Color.Red;
-                text.Text = "Only PDF or DOC/DOCX files are allowed.";
-                return;
-            }
-
-            string Name = name.Text.Trim();
-            string Email = email.Text.Trim();
-            string JobName = jobname.Text.Trim();
-            string Position = dropdown.SelectedValue;
-            string Salary = salary.Text.Trim();
-
-
-            text.Text = $"Name: {Name}<br/>Email: {Email}<br/>Job Name: {JobName}<br/>Position: {Position}<br/>Salary: {Salary}<br/>File uploaded successfully.";
-        }
+       
+    
     }
 }
 
 
+web config : 
 <appSettings>
 	<add key="ValidationSettings:UnobtrusiveValidationMode" value="None" />
 </appSettings>
