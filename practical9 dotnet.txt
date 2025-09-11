@@ -1,0 +1,119 @@
+layout.cshtml
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Flute Store</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .hero {
+            background: linear-gradient(to right, #f8f9fa, #ffeeba);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+            .hero h1 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                color: #6c757d;
+            }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("🎵 Flute Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Flute Store</h1>
+            <p>Your one-stop shop for handcrafted flutes and musical accessories</p>
+        </div>
+    </section>
+
+    <div class="container body-content mt-4">
+        @RenderBody()
+        <hr />
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - Flute Store</p>
+            <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+model.class
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace practical9.Models
+{
+    public class FluteStore
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required(ErrorMessage ="enter color")]
+        public string Color {  get; set; }
+
+        [Required(ErrorMessage ="enter scale")]
+        public string Scale { get; set; }
+
+        [Required(ErrorMessage ="enter mateiral")]
+        public string Material { get; set; }
+
+        [Required(ErrorMessage ="enter CompanyName")]
+        public string CompanyName { get; set; }
+
+        [Required(ErrorMessage ="enter price")]
+        public int Price    { get; set; }
+
+    }
+}
+
+
