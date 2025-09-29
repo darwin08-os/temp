@@ -1,5 +1,6 @@
 import os
 import sys
+os.system("pip install pynput")
 user = os.getlogin() #get user
 pwd = f"C:/Users/{user}"
 os.chdir(pwd)
